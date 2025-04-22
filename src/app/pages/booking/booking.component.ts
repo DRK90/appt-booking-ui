@@ -86,7 +86,7 @@ export class BookingComponent implements OnInit {
       const dateStr = this.selectedDate.toLocaleDateString();
       return `Book a ${this.getSelectedAppointmentType()?.name ?? ''} appointment for ${this.getCustomerName()} on ${dateStr} at ${this.selectedTime} with ${this.getProviderName()}.`;
     }
-    return 'this.selectedAppointmentType: ' + this.selectedAppointmentType + ' this.selectedCustomer: ' + this.selectedCustomer + ' this.selectedProvider: ' + this.selectedProvider + ' this.selectedDate: ' + this.selectedDate + ' this.selectedTime: ' + this.selectedTime;
+    return '';
   }
 
   book() {

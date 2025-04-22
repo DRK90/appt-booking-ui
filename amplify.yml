@@ -6,6 +6,7 @@ backend:
         - nvm install 18.19.1
         - nvm use 18.19.1
         - npm ci --cache .npm --prefer-offline
+
 frontend:
   phases:
     build:
@@ -13,13 +14,36 @@ frontend:
         - nvm install 18.19.1
         - nvm use 18.19.1
         - npm install -g @angular/cli
-        - ng version
-        - if [ "$AWS_BRANCH" == "develop" ]; then ng build --configuration=staging; else ng build --configuration=production; fi
+        - if [ "$AWS_BRANCH" == "develop" ]; then
+            ng build --configuration=staging;
+          else
+            ng build --configuration=production;
+          fi
+
   artifacts:
-    baseDirectory: dist/appt-booking-ui/browser  # Updated to match angular.json
+    baseDirectory: dist/appt-booking-ui/browser
     files:
       - '**/*'
+
   cache:
     paths:
       - .npm/**/*
       - node_modules/**/*
+
+  # <— Add this section
+  customRules:
+    - source: "/api/appointment-types/<*>"
+      target: "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types/<*>"
+      status: 200
+    - source: "/api/providers/<*>"
+      target: "https://providers-service-ianfiofulq-uc.a.run.app/providers/<*>"
+      status: 200
+    - source: "/api/customers/<*>"
+      target: "https://customers-service-ianfiofulq-uc.a.run.app/customers/<*>"
+      status: 200
+    - source: "/api/appointments/<*>"
+      target: "https://appointments-service-ianfiofulq-uc.a.run.app/appointments/<*>"
+      status: 200
+    - source: "</^[^.]+$|\\.(?!(css|js|html|png|svg|jpg|jpeg|gif|ico)$)([^.]+$)/>"
+      target: "/index.html"
+      status: 200

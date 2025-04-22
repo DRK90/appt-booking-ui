@@ -8,6 +8,7 @@ import { ProvidersService, Provider }               from '../../services/provide
 import { CustomersService, Customer }               from '../../services/customers.service';
 import { AppointmentsService }   from '../../services/appointments.service';
 import { MatSnackBar }           from '@angular/material/snack-bar';
+import { DateTime }             from 'luxon';
 
 @Component({
   standalone: true,
@@ -95,47 +96,43 @@ export class BookingComponent implements OnInit {
       this.snackBar.open('Please fill out all fields', 'Close', { duration: 3000 });
       return;
     }
-
-    // combine date + time into ISO string
-    const dt = new Date(this.selectedDate);
-    const [hours, mins] = this.selectedTime.split(':').map(Number);
-    dt.setHours(hours, mins);
-
-    // Convert to Eastern Time
-const startTimeET = dt.toLocaleString('en-US', {
-  timeZone: 'America/New_York',
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false // Use 24-hour format
-});
-
+  
+    // Combine selected date and time into one Luxon DateTime object in Eastern Time
+    const [hour, minute] = this.selectedTime.split(':').map(Number);
+  
+    const dt = DateTime.fromObject(
+      {
+        year: this.selectedDate.getFullYear(),
+        month: this.selectedDate.getMonth() + 1,
+        day: this.selectedDate.getDate(),
+        hour,
+        minute,
+      },
+      { zone: 'America/New_York' }
+    );
+  
     const payload = {
       appointment_type_id: this.selectedAppointmentType,
       customer_id: this.selectedCustomer,
       provider_id: this.selectedProvider,
-      start_time: startTimeET,
+      start_time: dt.toISO({ suppressMilliseconds: true }), // ISO format in ET
       notes: `Booked via UI`
     };
-
-    this.appointmentsService.bookAppointment(payload)
-      .subscribe({
-        next: () => {
-          this.snackBar.open('Appointment booked!', 'Close', { duration: 3000 });
-          // clear form
-          this.selectedAppointmentType = '';
-          this.selectedCustomer       = '';
-          this.selectedProvider       = '';
-          this.selectedDate           = null;
-          this.selectedTime           = '';
-          this.filteredProviders      = [];
-        },
-        error: (err: any) => {
-          this.snackBar.open(`Error: ${err.error.detail}`, 'Close', { duration: 5000 });
-        }
-      });
+  
+    this.appointmentsService.bookAppointment(payload).subscribe({
+      next: () => {
+        this.snackBar.open('Appointment booked!', 'Close', { duration: 3000 });
+        this.selectedAppointmentType = '';
+        this.selectedCustomer = '';
+        this.selectedProvider = '';
+        this.selectedDate = null;
+        this.selectedTime = '';
+        this.filteredProviders = [];
+      },
+      error: (err: any) => {
+        console.log(err);
+        this.snackBar.open(`Error: ${err.error.detail}`, 'Close', { duration: 5000 });
+      }
+    });
   }
 }

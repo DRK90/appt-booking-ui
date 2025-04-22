@@ -15,14 +15,14 @@ export class AppointmentTypesService {
   }
 
   async fetchAppointmentTypes(): Promise<void> {    
-    this.http.get<AppointmentType[]>(`${this.baseUrl}/appointment-types`).subscribe({
+    this.http.get<AppointmentType[]>(`${this.baseUrl}`).subscribe({
       next: (data) => this.appointmentTypesSubject.next(data),
       error: (error) => console.error('Error fetching appointment types:', error)
     })
   }
 
   postAppointmentType(appointmentType: AppointmentType): void {
-    this.http.post<AppointmentType>(`${this.baseUrl}/appointment-types`, appointmentType).subscribe({
+    this.http.post<AppointmentType>(`${this.baseUrl}`, appointmentType).subscribe({
       next: (data) => {
         this.appointmentTypesSubject.next([...this.appointmentTypesSubject.getValue(), data]);
         this.snackBar.open('Appointment type created', 'Close', { duration: 3000 });
@@ -35,7 +35,7 @@ export class AppointmentTypesService {
   }
 
   updateAppointmentType(appointmentType: AppointmentType): void {
-    this.http.put<AppointmentType>(`${this.baseUrl}/appointment-types/${appointmentType.id}`, appointmentType).subscribe({
+    this.http.put<AppointmentType>(`${this.baseUrl}/${appointmentType.id}`, appointmentType).subscribe({
       next: (data) => {
         this.appointmentTypesSubject.next(this.appointmentTypesSubject.getValue().map(type => type.id === appointmentType.id ? data : type));
         this.snackBar.open('Appointment type updated', 'Close', { duration: 3000 });
@@ -48,7 +48,7 @@ export class AppointmentTypesService {
   }
 
   deleteAppointmentType(appointmentType: AppointmentType): void {
-    this.http.delete<AppointmentType>(`${this.baseUrl}/appointment-types/${appointmentType.id}`).subscribe({
+    this.http.delete<AppointmentType>(`${this.baseUrl}/${appointmentType.id}`).subscribe({
       next: () => {
         this.appointmentTypesSubject.next(this.appointmentTypesSubject.getValue().filter(type => type.id !== appointmentType.id));
         this.snackBar.open('Appointment type deleted', 'Close', { duration: 3000 });

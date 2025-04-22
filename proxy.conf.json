@@ -1,6 +1,6 @@
 {
     "/api/providers": {
-      "target": "https://providers-service-ianfiofulq-uc.a.run.app",
+      "target": "https://providers-service-ianfiofulq-uc.a.run.app/providers",
       "secure": true,
       "changeOrigin": true,
       "pathRewrite": {
@@ -8,7 +8,7 @@
       }
     },
     "/api/appointment-types": {
-      "target": "https://appointment-types-service-ianfiofulq-uc.a.run.app",
+      "target": "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types",
       "secure": true,
       "changeOrigin": true,
       "pathRewrite": {
@@ -16,7 +16,7 @@
       }
     },
     "/api/customers": {
-      "target": "https://customers-service-ianfiofulq-uc.a.run.app",
+      "target": "https://customers-service-ianfiofulq-uc.a.run.app/customers",
       "secure": true,
       "changeOrigin": true,
       "pathRewrite": {
@@ -24,7 +24,7 @@
       }
     },
     "/api/appointments": {
-      "target": "https://appointments-service-ianfiofulq-uc.a.run.app",
+      "target": "https://appointments-service-ianfiofulq-uc.a.run.app/appointments",
       "secure": true,
       "changeOrigin": true,
       "pathRewrite": {

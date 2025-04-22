@@ -19,7 +19,7 @@ export class ProvidersService {
   }
 
   async fetchProviders(): Promise<void> {    
-    this.http.get<Provider[]>(`${this.baseUrl}/providers`).subscribe({
+    this.http.get<Provider[]>(`${this.baseUrl}`).subscribe({
       next: (data) => {
         this.providersSubject.next(data);
         console.log('Providers fetched:', data);
@@ -36,7 +36,7 @@ export class ProvidersService {
 
 
   createProvider(provider: Provider): void {
-    this.http.post<Provider>(`${this.baseUrl}/providers`, provider).subscribe({
+    this.http.post<Provider>(`${this.baseUrl}`, provider).subscribe({
       next: (data) => {
         this.providersSubject.next([...this.providersSubject.getValue(), data]);
         this.snackBar.open('Provider created', 'Close', { duration: 3000 });
@@ -49,7 +49,7 @@ export class ProvidersService {
   }
 
   updateProvider(provider: Provider): void {
-    this.http.put<Provider>(`${this.baseUrl}/providers/${provider.id}`, provider).subscribe({
+    this.http.put<Provider>(`${this.baseUrl}/${provider.id}`, provider).subscribe({
       next: (data) => {
         this.providersSubject.next([...this.providersSubject.getValue().map(p => p.id === provider.id ? data : p)]);
         this.snackBar.open('Provider updated', 'Close', { duration: 3000 });
@@ -62,7 +62,7 @@ export class ProvidersService {
   }
 
   deleteProvider(id: string): void {
-    this.http.delete<Provider>(`${this.baseUrl}/providers/${id}`).subscribe({
+    this.http.delete<Provider>(`${this.baseUrl}/${id}`).subscribe({
       next: () => {
         this.providersSubject.next(this.providersSubject.getValue().filter(p => p.id !== id));
         this.snackBar.open('Provider deleted', 'Close', { duration: 3000 });

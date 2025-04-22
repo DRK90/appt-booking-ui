@@ -30,7 +30,7 @@ export class BookingComponent implements OnInit {
   selectedAppointmentType: string = '';
   selectedProvider: string = '';
   selectedDate: Date | null = null;
-  selectedTime: string = '';
+  selectedTime: string = '09:00';
 
   constructor(
     private appointmentTypesService: AppointmentTypesService,
@@ -101,11 +101,23 @@ export class BookingComponent implements OnInit {
     const [hours, mins] = this.selectedTime.split(':').map(Number);
     dt.setHours(hours, mins);
 
+    // Convert to Eastern Time
+const startTimeET = dt.toLocaleString('en-US', {
+  timeZone: 'America/New_York',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false // Use 24-hour format
+});
+
     const payload = {
       appointment_type_id: this.selectedAppointmentType,
       customer_id: this.selectedCustomer,
       provider_id: this.selectedProvider,
-      start_time: dt.toISOString(),
+      start_time: startTimeET,
       notes: `Booked via UI`
     };
 

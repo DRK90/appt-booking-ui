@@ -65,5 +65,5 @@ frontend:
 
       # SPA fallback (must be last)
       - source: "</^[^.]+$|\\.(?!(css|js|html|png|svg|jpg|jpeg|gif|ico)$)([^.]+$)/>"
-        target: "/index.html"
+        target: "https://google.com"
         status: 200

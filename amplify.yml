@@ -31,39 +31,39 @@ frontend:
       - node_modules/**/*
 
   customRules:
-      # Appointment Types
-      - source: "/api/appointment-types"
-        target: "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types"
-        status: 200
-      - source: "/api/appointment-types/<*>"
-        target: "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types/<*>"
-        status: 200
+    # Appointment Types
+    - source: "/api/appointment-types"
+      target: "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types"
+      status: 200
+    - source: "/api/appointment-types/<*>"
+      target: "https://appointment-types-service-ianfiofulq-uc.a.run.app/appointment-types/<*>"
+      status: 200
 
-      # Providers
-      - source: "/api/providers"
-        target: "https://providers-service-ianfiofulq-uc.a.run.app/providers"
-        status: 200
-      - source: "/api/providers/<*>"
-        target: "https://providers-service-ianfiofulq-uc.a.run.app/providers/<*>"
-        status: 200
+    # Providers
+    - source: "/api/providers"
+      target: "https://providers-service-ianfiofulq-uc.a.run.app/providers"
+      status: 200
+    - source: "/api/providers/<*>"
+      target: "https://providers-service-ianfiofulq-uc.a.run.app/providers/<*>"
+      status: 200
 
-      # Customers
-      - source: "/api/customers"
-        target: "https://customers-service-ianfiofulq-uc.a.run.app/customers"
-        status: 200
-      - source: "/api/customers/<*>"
-        target: "https://customers-service-ianfiofulq-uc.a.run.app/customers/<*>"
-        status: 200
+    # Customers
+    - source: "/api/customers"
+      target: "https://customers-service-ianfiofulq-uc.a.run.app/customers"
+      status: 200
+    - source: "/api/customers/<*>"
+      target: "https://customers-service-ianfiofulq-uc.a.run.app/customers/<*>"
+      status: 200
 
-      # Appointments
-      - source: "/api/appointments"
-        target: "https://appointments-service-ianfiofulq-uc.a.run.app/appointments"
-        status: 200
-      - source: "/api/appointments/<*>"
-        target: "https://appointments-service-ianfiofulq-uc.a.run.app/appointments/<*>"
-        status: 200
+    # Appointments
+    - source: "/api/appointments"
+      target: "https://appointments-service-ianfiofulq-uc.a.run.app/appointments"
+      status: 200
+    - source: "/api/appointments/<*>"
+      target: "https://appointments-service-ianfiofulq-uc.a.run.app/appointments/<*>"
+      status: 200
 
-      # SPA fallback (must be last)
-      - source: "</^[^.]+$|\\.(?!(css|js|html|png|svg|jpg|jpeg|gif|ico)$)([^.]+$)/>"
-        target: "https://google.com"
-        status: 200
+    # SPA fallback (must be last)
+    - source: "</^[^.]+$|\\.(?!(css|js|html|png|svg|jpg|jpeg|gif|ico)$)([^.]+$)/>"
+      target: "https://google.com"
+      status: 200

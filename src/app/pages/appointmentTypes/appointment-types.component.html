@@ -1,0 +1,47 @@
+<mat-card class="container">
+    <h2>Appointment Types</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Appointment Type</mat-label>
+      <mat-select formControlName="selectedAppointmentType">
+        <mat-option value="">-- New Appointment Type --</mat-option>
+        <mat-option *ngFor="let c of appointmentTypes" [value]="c.id">
+          {{ c.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Duration</mat-label>
+        <input matInput formControlName="duration_minutes" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">
+          {{ form.value.selectedAppointmentType ? 'Update' : 'Create' }}
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="delete()"
+                *ngIf="form.value.selectedAppointmentType">
+          Delete
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  

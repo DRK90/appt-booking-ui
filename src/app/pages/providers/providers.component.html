@@ -1,0 +1,56 @@
+<mat-card class="container">
+    <h2>Providers</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Provider</mat-label>
+      <mat-select formControlName="selectedProvider">
+        <mat-option value="">-- New Provider --</mat-option>
+        <mat-option *ngFor="let p of providers" [value]="p.id">
+          {{ p.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Specialization</mat-label>
+        <input matInput formControlName="specialization" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Appointment Types</mat-label>
+        <mat-select formControlName="appointment_types" multiple>
+          <mat-option *ngFor="let type of appointmentTypes" [value]="type.id">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">
+          {{ form.value.selectedProvider ? 'Update' : 'Create' }}
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="delete()"
+                *ngIf="form.value.selectedProvider">
+          Delete
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  

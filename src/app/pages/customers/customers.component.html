@@ -1,0 +1,47 @@
+<mat-card class="container">
+    <h2>Customers</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Customer</mat-label>
+      <mat-select formControlName="selectedCustomer">
+        <mat-option value="">-- New Customer --</mat-option>
+        <mat-option *ngFor="let c of customers" [value]="c.id">
+          {{ c.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">
+          {{ form.value.selectedCustomer ? 'Update' : 'Create' }}
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="delete()"
+                *ngIf="form.value.selectedCustomer">
+          Delete
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  

@@ -1,0 +1,70 @@
+<mat-card class="booking-card">
+  <h2>Book an Appointment</h2>
+
+  <!-- Customer -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Customer</mat-label>
+    <mat-select [(ngModel)]="selectedCustomer">
+      <mat-option value="">-- Select Customer --</mat-option>
+      <mat-option *ngFor="let c of customers" [value]="c.id">
+        {{ c.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Appointment Type -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Appointment Type</mat-label>
+    <mat-select
+      [(ngModel)]="selectedAppointmentType"
+      (ngModelChange)="onTypeChange()">
+      <mat-option value="">-- Select Type --</mat-option>
+      <mat-option *ngFor="let t of appointmentTypes" [value]="t.id">
+        {{ t.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Provider -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Provider</mat-label>
+    <mat-select [(ngModel)]="selectedProvider" [disabled]="!filteredProviders.length">
+      <mat-option value="">-- Select Provider --</mat-option>
+      <mat-option *ngFor="let p of filteredProviders" [value]="p.id">
+        {{ p.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Date -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Pick a date"
+      [(ngModel)]="selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Time -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Time</mat-label>
+    <input matInput type="time" [(ngModel)]="selectedTime" />
+  </mat-form-field>
+
+  <!-- Summary -->
+  <div class="summary" *ngIf="summary">
+    {{ summary }}
+  </div>
+
+  <!-- Book Button -->
+  <button
+    mat-raised-button
+    color="primary"
+    class="book-btn"
+    (click)="book()">
+    Book Appointment
+  </button>
+</mat-card>

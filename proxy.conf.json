@@ -1,0 +1,35 @@
+{
+    "/api/providers": {
+      "target": "https://providers-service-ianfiofulq-uc.a.run.app",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api/providers": ""
+      }
+    },
+    "/api/appointment-types": {
+      "target": "https://appointment-types-service-ianfiofulq-uc.a.run.app",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api/appointment-types": ""
+      }
+    },
+    "/api/customers": {
+      "target": "https://customers-service-ianfiofulq-uc.a.run.app",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api/customers": ""
+      }
+    },
+    "/api/appointments": {
+      "target": "https://appointments-service-ianfiofulq-uc.a.run.app",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api/appointments": ""
+      }
+    }
+  }
+  

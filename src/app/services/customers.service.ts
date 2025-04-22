@@ -16,14 +16,14 @@ export class CustomersService {
   }
 
   async fetchCustomers(): Promise<void> {
-    this.http.get<Customer[]>(`${this.baseUrl}/customers`).subscribe({
+    this.http.get<Customer[]>(`${this.baseUrl}`).subscribe({
       next: (data) => this.customersSubject.next(data),
       error: (error) => console.error('Error fetching customers:', error)
     })
   }
 
   createCustomer(customer: Customer): void {
-    this.http.post<Customer>(`${this.baseUrl}/customers`, customer).subscribe({
+    this.http.post<Customer>(`${this.baseUrl}`, customer).subscribe({
       next: (data) => {
         this.customersSubject.next([...this.customersSubject.getValue(), data]);
         this.snackBar.open('Customer created', 'Close', { duration: 3000 });
@@ -36,7 +36,7 @@ export class CustomersService {
   }
 
   updateCustomer(customer: Customer): void {
-    this.http.put<Customer>(`${this.baseUrl}/customers/${customer.id}`, customer).subscribe({
+    this.http.put<Customer>(`${this.baseUrl}/${customer.id}`, customer).subscribe({
       next: (data) => {
         this.customersSubject.next([...this.customersSubject.getValue().map(c => c.id === customer.id ? data : c)]);
         this.snackBar.open('Customer updated', 'Close', { duration: 3000 });
@@ -49,7 +49,7 @@ export class CustomersService {
   }
 
   deleteCustomer(customer: Customer): void {
-    this.http.delete<Customer>(`${this.baseUrl}/customers/${customer.id}`).subscribe({
+    this.http.delete<Customer>(`${this.baseUrl}/${customer.id}`).subscribe({
       next: () => this.customersSubject.next(this.customersSubject.getValue().filter(c => c.id !== customer.id)),
       error: (error) => {
         console.error('Error deleting customer:', error);

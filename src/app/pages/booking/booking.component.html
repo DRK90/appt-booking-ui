@@ -24,6 +24,13 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+    <!-- If appointment is selected, show the cost, duration, and provider -->
+    <div *ngIf="selectedAppointmentType" class="appointment-details">
+      <p>Description: {{ getSelectedAppointmentType()?.description }}</p>
+      <p>Cost: ${{ getSelectedAppointmentType()?.price }}</p>
+      <p>Duration: {{ getSelectedAppointmentType()?.duration_minutes }} minutes</p>
+      <p>ID: {{ getSelectedAppointmentType()?.id }}</p>
+    </div>
 
   <!-- Provider -->
   <mat-form-field appearance="outline" class="full-width">
@@ -53,6 +60,7 @@
     <mat-label>Time</mat-label>
     <input matInput type="time" [(ngModel)]="selectedTime" />
   </mat-form-field>
+  selectedTime: {{selectedTime}}
 
   <!-- Summary -->
   <div class="summary" *ngIf="summary">

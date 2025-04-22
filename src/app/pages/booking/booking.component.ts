@@ -2,11 +2,11 @@
 import { Component, OnInit }      from '@angular/core';
 import { CommonModule }           from '@angular/common';
 import { FormsModule }            from '@angular/forms';
-import { MaterialModule }         from '../shared/material-module.component';
-import { AppointmentTypesService, AppointmentType } from '../services/appointment-types.service';
-import { ProvidersService, Provider }               from '../services/providers.service';
-import { CustomersService, Customer }               from '../services/customers.service';
-import { AppointmentsService }   from '../services/appointments.service';
+import { MaterialModule }         from '../../shared/material-module.component';
+import { AppointmentTypesService, AppointmentType } from '../../services/appointment-types.service';
+import { ProvidersService, Provider }               from '../../services/providers.service';
+import { CustomersService, Customer }               from '../../services/customers.service';
+import { AppointmentsService }   from '../../services/appointments.service';
 import { MatSnackBar }           from '@angular/material/snack-bar';
 
 @Component({
@@ -70,9 +70,10 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  getAppointmentTypeName(): string {
-    return this.appointmentTypes.find(t => t.id === this.selectedAppointmentType)?.name ?? '';
+  getSelectedAppointmentType() {
+    return this.appointmentTypes.find(t => t.id === this.selectedAppointmentType);
   }
+
   getCustomerName(): string {
     return this.customers.find(c => c.id === this.selectedCustomer)?.name ?? '';
   }
@@ -83,9 +84,9 @@ export class BookingComponent implements OnInit {
   get summary(): string {
     if (this.selectedAppointmentType && this.selectedCustomer && this.selectedProvider && this.selectedDate && this.selectedTime) {
       const dateStr = this.selectedDate.toLocaleDateString();
-      return `Book a ${this.getAppointmentTypeName()} appointment for ${this.getCustomerName()} on ${dateStr} at ${this.selectedTime} with ${this.getProviderName()}.`;
+      return `Book a ${this.getSelectedAppointmentType()?.name ?? ''} appointment for ${this.getCustomerName()} on ${dateStr} at ${this.selectedTime} with ${this.getProviderName()}.`;
     }
-    return '';
+    return 'this.selectedAppointmentType: ' + this.selectedAppointmentType + ' this.selectedCustomer: ' + this.selectedCustomer + ' this.selectedProvider: ' + this.selectedProvider + ' this.selectedDate: ' + this.selectedDate + ' this.selectedTime: ' + this.selectedTime;
   }
 
   book() {
@@ -121,7 +122,7 @@ export class BookingComponent implements OnInit {
           this.filteredProviders      = [];
         },
         error: (err: any) => {
-          this.snackBar.open(`Error: ${err.message}`, 'Close', { duration: 5000 });
+          this.snackBar.open(`Error: ${err.error.detail}`, 'Close', { duration: 5000 });
         }
       });
   }

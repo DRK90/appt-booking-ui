@@ -89,8 +89,14 @@ export class ProvidersComponent implements OnInit {
     if (selectedProvider) {
       this.providerService.updateProvider({ id: selectedProvider, ...payload });
     } else {
-      this.providerService.createProvider(payload as any);
+      console.log('Creating provider in component');
+      this.providerService.createProvider(payload as any).subscribe((id) => {
+      console.log('id', id);
+
+      });
     }
+
+
 
     // Reset after operation
     this.form.patchValue({
@@ -107,8 +113,9 @@ export class ProvidersComponent implements OnInit {
 
   delete(): void {
     const id = this.form.value.selectedProvider;
+    console.log('Deleting provider in component:', id);
     if (id) {
-      this.providerService.deleteProvider({ id } as any);
+      this.providerService.deleteProvider(id);
       this.form.patchValue({
         selectedProvider: '',
         name: '',

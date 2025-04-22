@@ -12,6 +12,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div *ngIf="form.value.selectedProvider">
+      <p>ID: {{ form.value.selectedProvider }}</p>
+    </div>
   
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>

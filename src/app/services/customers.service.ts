@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersService {
-  private baseUrl = '/api/customers';
+  private baseUrl = environment.apiUrls.customers + '/customers';
 
   private customersSubject: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
   public customers$: Observable<Customer[]> = this.customersSubject.asObservable();

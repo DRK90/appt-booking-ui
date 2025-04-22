@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class CustomersService {
-  private baseUrl = environment.apiUrls.customers + '/customers';
+  private baseUrl = environment.apiUrls.customers;
 
   private customersSubject: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
   public customers$: Observable<Customer[]> = this.customersSubject.asObservable();

@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({ providedIn: 'root' })
 export class AppointmentTypesService {
-  private baseUrl = '/api/appointment-types';
+  private baseUrl = environment.apiUrls.appointmentTypes;
 
   private appointmentTypesSubject: BehaviorSubject<AppointmentType[]> = new BehaviorSubject<AppointmentType[]>([]);
   public appointmentTypes$: Observable<AppointmentType[]> = this.appointmentTypesSubject.asObservable();

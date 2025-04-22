@@ -8,7 +8,7 @@ import { AppointmentType, AppointmentTypesService } from './appointment-types.se
   providedIn: 'root'
 })
 export class ProvidersService {
-  private baseUrl = '/api/providers';
+  private baseUrl = environment.apiUrls.providers;
 
   private providersSubject: BehaviorSubject<Provider[]> = new BehaviorSubject<Provider[]>([]);
   public providers$: Observable<Provider[]> = this.providersSubject.asObservable();

@@ -1,14 +1,19 @@
 .container {
-    padding: 16px;
-  }
-  
-  .full-width {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
-  mat-list-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.appointment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.appointment-card {
+  padding: 12px;
+}

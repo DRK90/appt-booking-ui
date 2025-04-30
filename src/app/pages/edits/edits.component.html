@@ -1,34 +1,33 @@
 <mat-card class="container">
-    <h2>View Appointments</h2>
-  
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Provider</mat-label>
-        <mat-select [(ngModel)]="selectedProvider" (selectionChange)="fetchAppointments()">
-          <mat-option value="">All Providers</mat-option>
-          <mat-option *ngFor="let p of providers" [value]="p.id">{{ p.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Customer</mat-label>
-        <mat-select [(ngModel)]="selectedCustomer" (selectionChange)="fetchAppointments()">
-          <mat-option value="">All Customers</mat-option>
-          <mat-option *ngFor="let c of customers" [value]="c.id">{{ c.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-  
-    <div *ngIf="appointments.length === 0 && (selectedProvider || selectedCustomer)">
-      <p>No appointments found.</p>
-    </div>
-  
-    <mat-list *ngIf="appointments.length > 0">
-      <mat-list-item *ngFor="let appt of appointments">
-        <div>
-          <strong>{{ getAppointmentTypeName(appt.appointment_type_id) }}</strong><br>
-          For: {{ getCustomerName(appt.customer_id) }}<br>
-          On: {{ appt.start_time | date:'medium' }}
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </mat-card>
-  
+  <h2>View Appointments</h2>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Provider</mat-label>
+    <mat-select [(ngModel)]="selectedProvider" (selectionChange)="fetchAppointments()">
+      <mat-option value="">All Providers</mat-option>
+      <mat-option *ngFor="let p of providers" [value]="p.id">{{ p.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Customer</mat-label>
+    <mat-select [(ngModel)]="selectedCustomer" (selectionChange)="fetchAppointments()">
+      <mat-option value="">All Customers</mat-option>
+      <mat-option *ngFor="let c of customers" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="appointments.length === 0 && (selectedProvider || selectedCustomer)">
+    <p>No appointments found.</p>
+  </div>
+
+  <div *ngIf="appointments.length > 0" class="appointment-grid">
+    <mat-card *ngFor="let appt of appointments" class="appointment-card">
+      <mat-card-title>{{ getAppointmentTypeName(appt.appointment_type_id) }}</mat-card-title>
+      <mat-card-content>
+        <p><strong>For:</strong> {{ getCustomerName(appt.customer_id) }}</p>
+        <p><strong>On:</strong> {{ appt.start_time | date:'medium' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-card>
